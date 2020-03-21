@@ -29,11 +29,14 @@ export default class App extends React.Component {
     this.setState({
       city: API_response.name,
       country: API_response.sys.country,
-      temperature: Math.round(API_response.main.temp - 273.15),
-      minTemperature: Math.round(API_response.main.temp_min - 273.15),
-      maxTemperature: Math.round(API_response.main.temp_max - 273.15)
+      temperature: calcTemp(API_response.main.temp),
+      minTemperature: calcTemp(API_response.main.temp_min),
+      maxTemperature: calcTemp(API_response.main.temp_min)
     })
-    console.log(this.state.minTemperature)
+    
+    function calcTemp(temp) {
+      return Math.round(temp - 273.15);
+    }
 
   }
 
