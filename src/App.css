@@ -11,3 +11,9 @@
   display: flex;
   justify-content: center;
 }
+
+.images {
+  height: 100px;
+  width: 100px;
+  color: black;
+}

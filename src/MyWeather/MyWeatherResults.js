@@ -1,5 +1,5 @@
 import React from 'react';
-import sunny from '../icons/Weather-Icons-38.png'
+
 
 export default function MyWeatherResults(props) {
     return (
@@ -10,7 +10,8 @@ export default function MyWeatherResults(props) {
                 <h1 className='temperature'>{props.temperature}&deg;</h1>
                 <sub className='maxTemperature'>{props.maxTemperature}&deg;</sub>
             </div>
-            <img className='images' alt='sunny' src={sunny} />
+            <img src={require(`../icons/${props.weatherIcon}.png`)} alt={props.weatherIcon}/>
+    
         </div>
     )
 }

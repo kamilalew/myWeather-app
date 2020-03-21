@@ -14,9 +14,14 @@ export default class App extends React.Component {
       country: '',
       temperature: '',
       minTemperature: '',
-      maxTemperature: ''
+      maxTemperature: '',
+      weatherIcon: '',
+      description: ''
     };
     this.getWeather();
+    this.weatherIcon = {
+      sunny: 'Clear_sky.png'
+    }
   }
 
   getWeather = async () => {
@@ -31,27 +36,45 @@ export default class App extends React.Component {
       country: API_response.sys.country,
       temperature: calcTemp(API_response.main.temp),
       minTemperature: calcTemp(API_response.main.temp_min),
-      maxTemperature: calcTemp(API_response.main.temp_min)
+      maxTemperature: calcTemp(API_response.main.temp_min),
+      weatherIcon: this.weatherIcon.sunny,
+      // description: getWeatherIcon(API_response.weather.description)
     })
-    
+    console.log(this.state.weatherIcon)
+   
     function calcTemp(temp) {
       return Math.round(temp - 273.15);
     }
-
-  }
-
   
 
+    // function getWeatherIcon(description) {
+    //   if (this.state.description === 'clear sky') {
+    //     this.setState({description: 'Clear_sky'})
+    //   } else {
+    //     if (this.state.description === 'rain') {
+    //     this.setState({description: 'dupa'})
+    //     }
+    //     console.log(description)
+    //   }
+
+    // }
+    // getWeatherIcon()
+
+  }
 
   render() {
 
     return (
       <div className="App">
         <MyWeatherSearch />
-        <MyWeatherResults city={this.state.city} country={this.state.country} 
+        <MyWeatherResults 
+          city={this.state.city} 
+          country={this.state.country} 
           temperature={this.state.temperature} 
           minTemperature={this.state.minTemperature}
-          maxTemperature={this.state.maxTemperature}/>
+          maxTemperature={this.state.maxTemperature}
+          weatherIcon={this.state.weatherIcon}
+          />
     </div>
     )
   }
