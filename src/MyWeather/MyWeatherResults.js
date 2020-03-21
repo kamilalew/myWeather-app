@@ -1,14 +1,14 @@
 import React from 'react';
 import sunny from '../icons/Weather-Icons-38.png'
 
-export default function MyWeatherResults() {
+export default function MyWeatherResults(props) {
     return (
         <div>
-            <h1 className='city'>New York</h1>
+            <h1 className='city'>{props.city}, {props.country}</h1>
             <div className='temperatures'>
-                <sub className='minTemperature'>23&deg;</sub>
-                <h1 className='temperature'>25&deg;</h1>
-                <sub className='maxTemperature'>27&deg;</sub>
+                <sub className='minTemperature'>{props.minTemperature}&deg;</sub>
+                <h1 className='temperature'>{props.temperature}&deg;</h1>
+                <sub className='maxTemperature'>{props.maxTemperature}&deg;</sub>
             </div>
             <img className='images' alt='sunny' src={sunny} />
         </div>
