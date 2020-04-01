@@ -1,5 +1,12 @@
 import React from 'react';
+import Clouds from '../icons/Clouds.png';
+import Clear from '../icons/Clear.png';
 
+const iconMapping = {
+    Clouds: Clouds,
+    cloudy: Clouds,
+    clear: Clear
+};
 
 export default function MyWeatherResults(props) {
     return (
@@ -10,8 +17,8 @@ export default function MyWeatherResults(props) {
                 <h1 className='temperature'>{props.temperature}&deg;</h1>
                 <sub className='maxTemperature'>{props.maxTemperature}&deg;</sub>
             </div>
-            <img src= '' alt={props.description}/>
-            {/*   <img src={require(`../icons/${props.description}.png`)} alt={props.description}/> */}
+            <img src={iconMapping[props.description]} alt={props.description}/>
+            {/* <img src={process.env.PUBLIC_URL + '/Clear.png'} alt={props.description}/> */}
         </div>
-    )
+    ) 
 }

@@ -18,29 +18,34 @@ export default class App extends React.Component {
       weatherIcon: '',
       description: ''
     };
-    // this.getWeather();
+    this.getWeather('London');
   }
 
-  getWeather = async (e) => {
-
-    const city = e.target.value;
+  getWeather = async (city) => {
 
     const API_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_Key}`)
 
-    const API_response = await API_call.json();
+    if(API_call.status===200) {
+      const API_response = await API_call.json();
 
-    console.log(API_response)
+      console.log(API_response);
+  
+      this.setState({
+        city: API_response.name,
+        country: API_response.sys.country,
+        temperature: calcTemp(API_response.main.temp),
+        minTemperature: calcTemp(API_response.main.temp_min),
+        maxTemperature: calcTemp(API_response.main.temp_min),
+        description: API_response.weather[0].main,
+        error: ''
+      })
+      console.log(this.state.description)
+    }else{
+      this.setState({
+        error: API_call.statusText
+      })
+    }
 
-    this.setState({
-      city: API_response.name,
-      // country: API_response.sys.country,
-      temperature: calcTemp(API_response.main.temp),
-      minTemperature: calcTemp(API_response.main.temp_min),
-      maxTemperature: calcTemp(API_response.main.temp_min),
-      description: API_response.weather[0].main
-    })
-    console.log(this.state.description)
-   
     function calcTemp(temp) {
       return Math.round(temp - 273.15);
     }
@@ -48,12 +53,15 @@ export default class App extends React.Component {
 
   render() {
 
+
+
     return (
       <div className="App">
         <MyWeatherSearch getWeather={this.getWeather}/>
+          {this.state.error ? <div>The city you searched for has not been found</div> : null}
         <MyWeatherResults 
           city={this.state.city} 
-          // country={this.state.country} 
+          country={this.state.country} 
           temperature={this.state.temperature} 
           minTemperature={this.state.minTemperature}
           maxTemperature={this.state.maxTemperature}

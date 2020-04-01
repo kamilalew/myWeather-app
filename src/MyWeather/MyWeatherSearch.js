@@ -6,6 +6,7 @@ export default class MyWeatherSearch extends React.Component {
       this.state = {
           city: ''
       };
+      console.log(this.state.city);
     }
 
     render() {
@@ -14,9 +15,8 @@ export default class MyWeatherSearch extends React.Component {
                  <h1>MyWeather APP</h1>
                  <input type='text' className='inputValue' placeholder='Enter the city' value={this.state.city}
                     onChange={e=> this.setState({city: e.target.value})}></input>
-           
                  <button type='submit' className='searchButton'
-                   onClick={this.props.getWeather}>Search</button>
+                   onClick={(e) => {this.props.getWeather(this.state.city)}}>Search</button>
             </div>
         )
     }
