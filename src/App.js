@@ -35,7 +35,7 @@ export default class App extends React.Component {
         country: API_response.sys.country,
         temperature: calcTemp(API_response.main.temp),
         minTemperature: calcTemp(API_response.main.temp_min),
-        maxTemperature: calcTemp(API_response.main.temp_min),
+        maxTemperature: calcTemp(API_response.main.temp_max),
         description: API_response.weather[0].main,
         error: ''
       })
