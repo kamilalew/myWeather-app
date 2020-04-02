@@ -16,18 +16,18 @@ export default class App extends React.Component {
       minTemperature: '',
       maxTemperature: '',
       weatherIcon: '',
-      description: ''
+      description: '',
     };
-    this.getWeather('London');
+    this.getWeather('');
   }
 
   getWeather = async (city) => {
 
     const API_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_Key}`)
 
-    if(API_call.status===200) {
-      const API_response = await API_call.json();
+    if(API_call.status === 200) {
 
+      const API_response = await API_call.json();
       console.log(API_response);
   
       this.setState({
@@ -40,6 +40,11 @@ export default class App extends React.Component {
         error: ''
       })
       console.log(this.state.description)
+      console.log(this.state.error)
+    }else if(API_call.status === 400) {
+      this.setState({
+        error: ''
+      })
     }else{
       this.setState({
         error: API_call.statusText
