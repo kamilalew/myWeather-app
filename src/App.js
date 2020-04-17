@@ -23,7 +23,7 @@ export default class App extends React.Component {
 
   getWeather = async (city) => {
 
-    const API_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_Key}`)
+    const API_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_Key}`)
 
     if(API_call.status === 200) {
 
